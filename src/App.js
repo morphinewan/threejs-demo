@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { BoxGeometry, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 class ThreeJSModel extends Component {
@@ -12,8 +12,10 @@ class ThreeJSModel extends Component {
     // use ref as a mount point of the Three.js scene instead of the document.body
     this.mount.appendChild(renderer.domElement);
     const geometry = new BoxGeometry(1, 1, 1);
-    const material = new MeshBasicMaterial({ color: 0x00ff00 });
+    const { color } = this.props;
+    const material = new MeshBasicMaterial({ color });
     const cube = new Mesh(geometry, material);
+    this.cude = cube;
     scene.add(cube);
     camera.position.z = 5;
     const animate = () => {
@@ -23,6 +25,13 @@ class ThreeJSModel extends Component {
       renderer.render(scene, camera);
     };
     animate();
+  }
+
+  componentDidUpdate(prev) {
+    const { color } = this.props;
+    if (color) {
+      this.cude.material.color.setHex(color);
+    }
   }
 
   render() {
@@ -37,11 +46,34 @@ class ThreeJSModel extends Component {
 }
 
 function App() {
+  const [color, setColor] = useState(0x00ff00);
+
+  console.log(color);
   return (
     <div className="App">
       <header className="App-header">
-        <p>Threejs with React Demo</p>
-        <ThreeJSModel />
+        <div>
+          Threejs with React Demo <br />
+          <input
+            type="button"
+            value="Red"
+            onClick={() => setColor(0xff0000)}
+            style={{ width: '100px', fontSize: 32, marginRight: '2rem', backgroundColor: 'red' }}
+          />
+          <input
+            type="button"
+            value="Blue"
+            onClick={() => setColor(0x0000ff)}
+            style={{ width: '100px', fontSize: 32, marginRight: '2rem', backgroundColor: 'blue' }}
+          />
+          <input
+            type="button"
+            value="Green"
+            onClick={() => setColor(0x00ff00)}
+            style={{ width: '100px', fontSize: 32, marginRight: '2rem', backgroundColor: 'green' }}
+          />
+        </div>
+        <ThreeJSModel color={color} />
       </header>
     </div>
   );
