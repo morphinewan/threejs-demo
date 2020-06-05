@@ -1,0 +1,57 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+  },
+  "plugins": ["babel", "react", "import", "prettier"],
+  "extends": ["eslint-config-airbnb", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    },
+    "import/ignore": [ "node_modules", "akita" ]
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "arrow-parens": ["error", "as-needed"],
+    "no-bitwise": "off",
+    "comma-dangle": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "no-console": "off",
+    "no-continue": "off",
+    "id-length": "off",
+    "react/jsx-filename-extension": "off",
+    "generator-star-spacing": "off",
+    "react/require-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": "off",
+    "react/forbid-foreign-prop-types": "off",
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error",
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/img-has-alt": "off",
+    "import/no-dynamic-require": "off",
+    "class-methods-use-this": "off", // javascript无法继承static的成员变量，而框架依赖于继承机制实现共通化，所以不能用这个规则
+    "object-curly-newline": "off", // 毫无道理的规则，不开
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/anchor-is-valid": "off", // Bootstrap框架原因，禁用
+    "jsx-a11y/click-events-have-key-events": "off", // 残疾人专用，无视
+    "jsx-a11y/label-has-associated-control": "off", // label需要绑定对应的控件，没啥用
+    "max-classes-per-file": "off"
+  }
+}
